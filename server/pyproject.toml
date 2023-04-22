@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "flowcast-server"
+version = "0.1.0"
+description = ""
+authors = ["Diego Lopes <503598-diegolopes@users.noreply.gitlab.com>"]
+readme = "README.md"
+packages = [{include = "flowcast_server"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pytest = "^7.3.1"
+validators = "^0.20.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
