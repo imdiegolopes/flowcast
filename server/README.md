@@ -7,6 +7,12 @@ make install
 make run
 ```
 
+## Import python packages into Poetry
+
+```
+poetry add $( cat requirements.txt )
+``` 
+
 ## Running tests
 
 To run the tests, you must have Python 3 and Pytest installed on your system.
