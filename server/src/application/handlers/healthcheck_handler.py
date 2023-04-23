@@ -2,7 +2,7 @@ from flask import (
     jsonify
 )
 
-class Healthcheck:
+class HealthcheckHandler:
     def __init__():
         pass
 

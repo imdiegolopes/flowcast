@@ -1,4 +1,6 @@
 import sqlite3
+
+
 class SqliteClient:
     def __init__(self, db_file):
         self.db_file = db_file
