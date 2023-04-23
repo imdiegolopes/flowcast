@@ -1,5 +1,12 @@
 # Flowcast Server
 
+## Before start
+
+```
+make install
+make run
+```
+
 ## Running tests
 
 To run the tests, you must have Python 3 and Pytest installed on your system.
