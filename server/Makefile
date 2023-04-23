@@ -1,15 +1,14 @@
-# Install dependencies
+export FLASK_APP=src/application/app.py
+export FLASK_ENV=development
+
 install:
-    pip install -r requirements.txt
+	pip install -r requirements.txt
 
-# Run the Flask app
 run:
-    FLASK_APP=server/src/application/app.py flask run
+	flask run --port=5000 
 
-# Run tests
 test:
-    pytest
+	pytest
 
-# Clean the environment
 clean:
-    rm -rf __pycache__/
+	rm -rf __pycache__/
