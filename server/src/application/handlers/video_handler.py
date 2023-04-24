@@ -72,3 +72,9 @@ class VideoHandler:
             }), 400
 
         return jsonify(output), 201
+
+    def handle_update_video(video_id: str):
+        pass
+
+    def handle_delete_video(video_id: str):
+        pass
