@@ -34,3 +34,14 @@ class SqliteClient:
         cursor.close()
         self.connection.commit()
         return result
+
+    def execute_insert(self, query, parameters=None):
+        cursor = self.connection.cursor()
+        if parameters is not None:
+            cursor.execute(query, parameters)
+        else:
+            cursor.execute(query)
+        result = cursor.lastrowid
+        cursor.close()
+        self.connection.commit()
+        return result

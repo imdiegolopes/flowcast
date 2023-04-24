@@ -1,0 +1,21 @@
+###
+GET http://localhost:5000/v1/videos
+Accept: application/json
+
+### 
+GET http://localhost:5000/v1/videos/1
+Accept: application/json
+
+###
+POST http://localhost:5000/v1/videos
+Content-Type: application/json
+
+{
+    "channel_id": "10",
+    "description": "Would let use of figure buy. Rather page school join ability make others check. Cause your already statement money.",
+    "duration": 120,
+    "published_at": "2023-04-18T15:00:41",
+    "thumbnail_url": "https://picsum.photos/535/476",
+    "title": "Participant box before federal appear.",
+    "url": "https://www.aguilar-torres.com/"
+}

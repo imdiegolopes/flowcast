@@ -10,13 +10,12 @@ app = Flask(__name__)
 app.add_url_rule('/', 'index', HealthcheckHandler.handle, methods=['GET'])
 app.add_url_rule('/healthcheck', 'healthcheck',
                  HealthcheckHandler.handle, methods=['GET'])
-app.add_url_rule('/videos', 'get_videos',
+app.add_url_rule('/v1/videos', 'get_videos',
                  VideoHandler.handle_get_videos, methods=['GET'])
-app.add_url_rule('/videos/<video_id>', 'get_video',
+app.add_url_rule('/v1/videos/<video_id>', 'get_video',
                  VideoHandler.handle_get_video, methods=['GET'])
-app.add_url_rule('/videos', 'create_video',
+app.add_url_rule('/v1/videos', 'create_video',
                  VideoHandler.handle_create_video, methods=['POST'])
-
 
 
 @app.route('/videos/<video_id>', methods=['PUT'])

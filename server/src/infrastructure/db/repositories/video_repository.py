@@ -24,11 +24,24 @@ class VideoRepository:
         client = SqliteClient(db_file)
         client.connect()
 
-        result = client.execute_query_single(
+        result = client.execute_query(
             "SELECT * FROM videos")
 
         client.disconnect()
         return result
+
+    def create(self, video: any):
+        db_file = os.path.abspath(
+            "./src/infrastructure/db/database/flowcast.db")
+        client = SqliteClient(db_file)
+        client.connect()
+
+        result = client.execute_insert(
+            "INSERT INTO videos (title, description, url, duration, thumbnail_url, published_at, channel_id) VALUES (?, ?, ?, ?, ?, ?, ?)", (video.title, video.description, video.url, video.duration, video.thumbnail_url, video.published_at, video.channel_id))
+        print(result)
+        client.disconnect()
+        return result
+
 
     def migration(self):
         # Define the SQL commands to create the videos table and insert a row of data

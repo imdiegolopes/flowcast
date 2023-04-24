@@ -1,0 +1,129 @@
+openapi: 3.0.0
+info:
+  title: Video API
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+paths:
+  /v1/videos:
+    get:
+      summary: Get all videos
+      description: Returns a list of all videos.
+      responses:
+        '200':
+          description: A JSON array of videos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Video'
+    post:
+      summary: Create a video
+      description: Creates a new video with the given data.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoInput'
+      responses:
+        '201':
+          description: The newly created video
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+  /v1/videos/{id}:
+    get:
+      summary: Get a video by ID
+      description: Returns a single video with the given ID.
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the video to retrieve
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The requested video
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+    put:
+      summary: Update a video by ID
+      description: Updates the video with the given ID with the provided data.
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the video to update
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoInput'
+      responses:
+        '200':
+          description: The updated video
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+    delete:
+      summary: Delete a video by ID
+      description: Deletes the video with the given ID.
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the video to delete
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: The video was deleted successfully
+components:
+  schemas:
+    Video:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique identifier for the video.
+        title:
+          type: string
+          description: The title of the video.
+        description:
+          type: string
+          description: A brief description of the video.
+        url:
+          type: string
+          description: The URL where the video can be accessed.
+        duration:
+          type: integer
+          description: The length of the video in seconds.
+        thumbnail_url:
+          type: string
+          description: The URL of the video's thumbnail image.
+        published_at:
+          type: string
+          format: date-time
+          description: The date and time the video was published.
+        channel_id:
+          type: integer
+          description: The ID of the channel that the video belongs to.
+      required:
+        - title
+        - url
+    VideoInput:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The title
