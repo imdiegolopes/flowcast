@@ -6,7 +6,7 @@
 
 Flowcast is an internet-based platform that streams audio and video content, catering specifically to the podcast audience. The platform strives to provide the highest level of accessibility to all its users, aiming to deliver a unique and personalized user experience.
 
-As an MVP developed for the first sprint of PUC-Rio's Graduate Course in Software Engineering, this product currently offers only basic functionalities.
+As an MVP developed for the first sprint of PUC-Rio's Post Graduation Course in Software Engineering, this product currently offers only basic functionalities.
 
 ## Flowcast Server
 
