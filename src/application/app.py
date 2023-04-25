@@ -1,11 +1,12 @@
 from handlers.video_handler import VideoHandler
 from handlers.healthcheck_handler import HealthcheckHandler
 from flask import (
-    Flask,
-    jsonify
+    Flask
 )
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 app.add_url_rule('/', 'index', HealthcheckHandler.handle, methods=['GET'])
 app.add_url_rule('/healthcheck', 'healthcheck',
