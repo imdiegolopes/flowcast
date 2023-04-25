@@ -52,13 +52,13 @@ class VideoHandler:
 
         try:
             input = Video(None, data.get('title'), data.get('description'), data.get('url'),
-                        data.get('duration'), data.get('thumbnail_url'), data.get('published_at'), data.get('channel_id'))
+                          data.get('duration'), data.get('thumbnail_url'), data.get('published_at'), data.get('channel_id'))
 
             output = input.get_value()
 
             video_repository = VideoRepository()
             result = video_repository.create(input)
-            
+
             if result is None:
                 return jsonify({
                     "error": "video not created"
@@ -74,7 +74,56 @@ class VideoHandler:
         return jsonify(output), 201
 
     def handle_update_video(video_id: str):
-        pass
+        data = request.get_json()
+
+        if data is None:
+            return jsonify({
+                "error": "invalid data"
+            }), 400
+
+        try:
+            input = Video(None, data.get('title'), data.get('description'), data.get('url'),
+                          data.get('duration'), data.get('thumbnail_url'), data.get('published_at'), data.get('channel_id'))
+
+            output = input.get_value()
+
+            video_repository = VideoRepository()
+            result = video_repository.update(input, video_id)
+
+            output['id'] = video_id
+
+            if result is None:
+                return jsonify({
+                    "error": "video not updated"
+                }), 500
+
+        except ValueError as e:
+            return jsonify({
+                "error": str(e)
+            }), 400
+
+        return jsonify(output), 200
 
     def handle_delete_video(video_id: str):
-        pass
+        if video_id is None:
+            return jsonify({
+                "error": "invalid data"
+            }), 400
+
+        try:
+            video_id = int(video_id)
+
+            video_repository = VideoRepository()
+            result = video_repository.delete(video_id)
+
+            if result is None:
+                return jsonify({
+                    "error": "video not deleted"
+                }), 500
+
+        except ValueError as e:
+            return jsonify({
+                "error": str(e)
+            }), 400
+
+        return jsonify({}), 200
