@@ -86,7 +86,7 @@ paths:
           schema:
             type: integer
       responses:
-        '204':
+        '200':
           description: The video was deleted successfully
 components:
   schemas:
