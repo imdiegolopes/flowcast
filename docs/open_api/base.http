@@ -1,12 +1,12 @@
-###
+### Get Videos
 GET http://localhost:5000/v1/videos
 Accept: application/json
 
-### 
-GET http://localhost:5000/v1/videos/1
+### Get Video 
+GET http://localhost:5000/v1/videos/5
 Accept: application/json
 
-###
+### Create Video
 POST http://localhost:5000/v1/videos
 Content-Type: application/json
 
@@ -19,3 +19,22 @@ Content-Type: application/json
     "title": "Participant box before federal appear.",
     "url": "https://www.aguilar-torres.com/"
 }
+
+
+### Update Video
+PUT http://localhost:5000/v1/videos/5
+Content-Type: application/json
+
+{
+    "channel_id": "10",
+    "description": "Description modified",
+    "duration": 12,
+    "published_at": "2023-04-18T15:00:41",
+    "thumbnail_url": "https://picsum.photos/535/476",
+    "title": "Title Modified!",
+    "url": "https://www.aguilar-torres.com/"
+}
+
+### Delete Video
+DELETE http://localhost:5000/v1/videos/5
+Content-Type: application/json
