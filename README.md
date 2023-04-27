@@ -48,6 +48,10 @@ To run the tests, follow these steps:
 - Install Pytest by running pip install pytest.
 - Run pytest to execute all tests.
 
+```bash
+make test
+```
+
 If all tests pass, you should see a summary of the tests run and their results.
 
 If you would like to run a specific test file or test case, you can use the -k option followed by the name of the test file or test case.

@@ -36,5 +36,5 @@ Content-Type: application/json
 }
 
 ### Delete Video
-DELETE http://localhost:5000/v1/videos/5
+DELETE http://localhost:5000/v1/videos/2
 Content-Type: application/json

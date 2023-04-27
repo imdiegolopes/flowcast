@@ -114,6 +114,14 @@ class VideoHandler:
             video_id = int(video_id)
 
             video_repository = VideoRepository()
+
+            video = video_repository.get_by_id(video_id)
+
+            if video is None:
+                return jsonify({
+                    "error": "video not found"
+                }), 404
+
             result = video_repository.delete(video_id)
 
             if result is None:
@@ -126,4 +134,6 @@ class VideoHandler:
                 "error": str(e)
             }), 400
 
-        return jsonify({}), 200
+        return jsonify({
+            "message": "video deleted successfully"
+        }), 200
