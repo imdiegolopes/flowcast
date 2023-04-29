@@ -1,13 +1,13 @@
-### Get Videos
-GET http://localhost:5000/v1/videos
+### Get moods
+GET http://localhost:5000/v1/moods
 Accept: application/json
 
-### Get Video 
-GET http://localhost:5000/v1/videos/5
+### Get mood 
+GET http://localhost:5000/v1/moods/5
 Accept: application/json
 
-### Create Video
-POST http://localhost:5000/v1/videos
+### Create mood
+POST http://localhost:5000/v1/moods
 Content-Type: application/json
 
 {
@@ -21,8 +21,8 @@ Content-Type: application/json
 }
 
 
-### Update Video
-PUT http://localhost:5000/v1/videos/5
+### Update mood
+PUT http://localhost:5000/v1/moods/5
 Content-Type: application/json
 
 {
@@ -35,6 +35,6 @@ Content-Type: application/json
     "url": "https://www.aguilar-torres.com/"
 }
 
-### Delete Video
-DELETE http://localhost:5000/v1/videos/2
+### Delete mood
+DELETE http://localhost:5000/v1/moods/2
 Content-Type: application/json

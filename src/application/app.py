@@ -1,4 +1,4 @@
-from handlers.video_handler import VideoHandler
+from src.application.handlers.mood_handler import MoodHandler
 from handlers.healthcheck_handler import HealthcheckHandler
 from flask import (
     Flask
@@ -11,16 +11,16 @@ CORS(app)
 app.add_url_rule('/', 'index', HealthcheckHandler.handle, methods=['GET'])
 app.add_url_rule('/healthcheck', 'healthcheck',
                  HealthcheckHandler.handle, methods=['GET'])
-app.add_url_rule('/v1/videos', 'get_videos',
-                 VideoHandler.handle_get_videos, methods=['GET'])
-app.add_url_rule('/v1/videos/<video_id>', 'get_video',
-                 VideoHandler.handle_get_video, methods=['GET'])
-app.add_url_rule('/v1/videos', 'create_video',
-                 VideoHandler.handle_create_video, methods=['POST'])
-app.add_url_rule('/v1/videos/<video_id>', 'update_video',
-                 VideoHandler.handle_update_video, methods=['PUT'])
-app.add_url_rule('/v1/videos/<video_id>', 'delete_video',
-                 VideoHandler.handle_delete_video, methods=['DELETE'])
+app.add_url_rule('/v1/moods', 'get_moods',
+                 MoodHandler.handle_get_moods, methods=['GET'])
+app.add_url_rule('/v1/moods/<mood_id>', 'get_mood',
+                 MoodHandler.handle_get_mood, methods=['GET'])
+app.add_url_rule('/v1/moods', 'create_mood',
+                 MoodHandler.handle_create_mood, methods=['POST'])
+app.add_url_rule('/v1/moods/<mood_id>', 'update_mood',
+                 MoodHandler.handle_update_mood, methods=['PUT'])
+app.add_url_rule('/v1/moods/<mood_id>', 'delete_mood',
+                 MoodHandler.handle_delete_mood, methods=['DELETE'])
 
 
 if __name__ == '__main__':

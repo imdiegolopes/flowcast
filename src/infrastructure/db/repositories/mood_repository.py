@@ -2,10 +2,10 @@ from src.infrastructure.db.clients.sqlite_client import SqliteClient
 import os
 
 
-class VideoRepository:
+class MoodRepository:
     def __init__(self):
         db_file = os.path.abspath(
-            "./src/infrastructure/db/database/flowcast.db")
+            "./src/infrastructure/db/database/moody.db")
         self.client = SqliteClient(db_file)
 
         pass
@@ -13,7 +13,7 @@ class VideoRepository:
     def get_by_id(self, id: str) -> any:
         self.client.connect()
         result = self.client.execute_query_single(
-            "SELECT * FROM videos WHERE id = ?", (id,))
+            "SELECT * FROM moods WHERE id = ?", (id,))
 
         self.client.disconnect()
         return result
@@ -22,25 +22,25 @@ class VideoRepository:
         self.client.connect()
 
         result = self.client.execute_query(
-            "SELECT * FROM videos")
+            "SELECT * FROM moods")
 
         self.client.disconnect()
         return result
 
-    def create(self, video: any):
+    def create(self, mood: any):
         self.client.connect()
 
         result = self.client.execute_insert(
-            "INSERT INTO videos (title, description, url, duration, thumbnail_url, published_at, channel_id) VALUES (?, ?, ?, ?, ?, ?, ?)", (video.title, video.description, video.url, video.duration, video.thumbnail_url, video.published_at, video.channel_id))
+            "INSERT INTO moods (title, description, url, duration, thumbnail_url, published_at, channel_id) VALUES (?, ?, ?, ?, ?, ?, ?)", (mood.title, mood.description, mood.url, mood.duration, mood.thumbnail_url, mood.published_at, mood.channel_id))
         print(result)
         self.client.disconnect()
         return result
 
-    def update(self, video: any, id: str):
+    def update(self, mood: any, id: str):
         self.client.connect()
 
         result = self.client.execute_insert(
-            "UPDATE videos SET title = ?, description = ?, url = ?, duration = ?, thumbnail_url = ?, published_at = ?, channel_id = ? WHERE id = ?", (video.title, video.description, video.url, video.duration, video.thumbnail_url, video.published_at, video.channel_id, id))
+            "UPDATE moods SET title = ?, description = ?, url = ?, duration = ?, thumbnail_url = ?, published_at = ?, channel_id = ? WHERE id = ?", (mood.title, mood.description, mood.url, mood.duration, mood.thumbnail_url, mood.published_at, mood.channel_id, id))
 
         self.client.disconnect()
         return result
@@ -49,17 +49,17 @@ class VideoRepository:
         self.client.connect()
 
         result = self.client.execute_insert(
-            "DELETE FROM videos WHERE id = ?", (id,))
+            "DELETE FROM moods WHERE id = ?", (id,))
 
         self.client.disconnect()
         return result
 
 
     def migration(self):
-        # Define the SQL commands to create the videos table and insert a row of data
+        # Define the SQL commands to create the moods table and insert a row of data
         sql_commands = [
             '''
-            CREATE TABLE IF NOT EXISTS videos (
+            CREATE TABLE IF NOT EXISTS moods (
                 id INTEGER PRIMARY KEY,
                 title TEXT,
                 description TEXT,

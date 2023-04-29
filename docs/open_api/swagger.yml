@@ -1,64 +1,64 @@
 openapi: 3.0.0
 info:
-  title: Video API
+  title: mood API
   version: 1.0.0
 servers:
   - url: http://localhost:5000
 paths:
-  /v1/videos:
+  /v1/moods:
     get:
-      summary: Get all videos
-      description: Returns a list of all videos.
+      summary: Get all moods
+      description: Returns a list of all moods.
       responses:
         '200':
-          description: A JSON array of videos
+          description: A JSON array of moods
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Video'
+                  $ref: '#/components/schemas/mood'
     post:
-      summary: Create a video
-      description: Creates a new video with the given data.
+      summary: Create a mood
+      description: Creates a new mood with the given data.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VideoInput'
+              $ref: '#/components/schemas/moodInput'
       responses:
         '201':
-          description: The newly created video
+          description: The newly created mood
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Video'
-  /v1/videos/{id}:
+                $ref: '#/components/schemas/mood'
+  /v1/moods/{id}:
     get:
-      summary: Get a video by ID
-      description: Returns a single video with the given ID.
+      summary: Get a mood by ID
+      description: Returns a single mood with the given ID.
       parameters:
         - name: id
           in: path
-          description: The ID of the video to retrieve
+          description: The ID of the mood to retrieve
           required: true
           schema:
             type: integer
       responses:
         '200':
-          description: The requested video
+          description: The requested mood
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Video'
+                $ref: '#/components/schemas/mood'
     put:
-      summary: Update a video by ID
-      description: Updates the video with the given ID with the provided data.
+      summary: Update a mood by ID
+      description: Updates the mood with the given ID with the provided data.
       parameters:
         - name: id
           in: path
-          description: The ID of the video to update
+          description: The ID of the mood to update
           required: true
           schema:
             type: integer
@@ -67,61 +67,61 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VideoInput'
+              $ref: '#/components/schemas/moodInput'
       responses:
         '200':
-          description: The updated video
+          description: The updated mood
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Video'
+                $ref: '#/components/schemas/mood'
     delete:
-      summary: Delete a video by ID
-      description: Deletes the video with the given ID.
+      summary: Delete a mood by ID
+      description: Deletes the mood with the given ID.
       parameters:
         - name: id
           in: path
-          description: The ID of the video to delete
+          description: The ID of the mood to delete
           required: true
           schema:
             type: integer
       responses:
         '200':
-          description: The video was deleted successfully
+          description: The mood was deleted successfully
 components:
   schemas:
-    Video:
+    mood:
       type: object
       properties:
         id:
           type: integer
-          description: The unique identifier for the video.
+          description: The unique identifier for the mood.
         title:
           type: string
-          description: The title of the video.
+          description: The title of the mood.
         description:
           type: string
-          description: A brief description of the video.
+          description: A brief description of the mood.
         url:
           type: string
-          description: The URL where the video can be accessed.
+          description: The URL where the mood can be accessed.
         duration:
           type: integer
-          description: The length of the video in seconds.
+          description: The length of the mood in seconds.
         thumbnail_url:
           type: string
-          description: The URL of the video's thumbnail image.
+          description: The URL of the mood's thumbnail image.
         published_at:
           type: string
           format: date-time
-          description: The date and time the video was published.
+          description: The date and time the mood was published.
         channel_id:
           type: integer
-          description: The ID of the channel that the video belongs to.
+          description: The ID of the channel that the mood belongs to.
       required:
         - title
         - url
-    VideoInput:
+    moodInput:
       type: object
       properties:
         title:
