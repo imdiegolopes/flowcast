@@ -26,6 +26,7 @@ validators = "0.20.0"
 werkzeug = "2.2.3"
 python-dotenv = "^1.0.0"
 setuptools = "^67.7.1"
+uuid = "^1.30"
 
 
 [build-system]

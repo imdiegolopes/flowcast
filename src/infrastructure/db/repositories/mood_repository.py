@@ -14,7 +14,6 @@ class MoodRepository:
         self.client.connect()
         result = self.client.execute_query_single(
             "SELECT * FROM moods WHERE id = ?", (id,))
-
         self.client.disconnect()
         return result
 
@@ -31,7 +30,7 @@ class MoodRepository:
         self.client.connect()
 
         result = self.client.execute_insert(
-            "INSERT INTO moods (title, description, url, duration, thumbnail_url, published_at, channel_id) VALUES (?, ?, ?, ?, ?, ?, ?)", (mood.title, mood.description, mood.url, mood.duration, mood.thumbnail_url, mood.published_at, mood.channel_id))
+            "INSERT INTO moods (id, date, feeling, intensity, comments, activity, created_on, updated_on) VALUES(?,?,?,?,?,?,?,?)", (str(mood.id), mood.date, mood.feeling, mood.intensity, mood.comments, mood.activity, mood.created_on, mood.updated_on))
         print(result)
         self.client.disconnect()
         return result
@@ -40,11 +39,10 @@ class MoodRepository:
         self.client.connect()
 
         result = self.client.execute_insert(
-            "UPDATE moods SET title = ?, description = ?, url = ?, duration = ?, thumbnail_url = ?, published_at = ?, channel_id = ? WHERE id = ?", (mood.title, mood.description, mood.url, mood.duration, mood.thumbnail_url, mood.published_at, mood.channel_id, id))
-
+            "UPDATE moods SET date = ?, feeling = ?, intensity = ?, comments = ?, activity = ?, updated_on = ? WHERE id = ?", (mood.date, mood.feeling, mood.intensity, mood.comments, mood.activity, mood.updated_on,  id))
         self.client.disconnect()
         return result
-    
+
     def delete(self, id: str):
         self.client.connect()
 
@@ -54,21 +52,21 @@ class MoodRepository:
         self.client.disconnect()
         return result
 
-
     def migration(self):
         # Define the SQL commands to create the moods table and insert a row of data
         sql_commands = [
             '''
             CREATE TABLE IF NOT EXISTS moods (
-                id INTEGER PRIMARY KEY,
-                title TEXT,
-                description TEXT,
-                url TEXT,
-                duration INTEGER,
-                thumbnail_url TEXT,
-                published_at TEXT,
-                channel_id TEXT DEFAULT NULL
+                id TEXT PRIMARY KEY,
+                date TEXT NOT NULL,
+                feeling TEXT NOT NULL,
+                intensity INTEGER NOT NULL,
+                comments TEXT NOT NULL,
+                activity TEXT NOT NULL,
+                created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
+
             ''',
         ]
 

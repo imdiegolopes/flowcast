@@ -3,7 +3,7 @@ GET http://localhost:5000/v1/moods
 Accept: application/json
 
 ### Get mood 
-GET http://localhost:5000/v1/moods/5
+GET http://localhost:5000/v1/moods/1c5709dc-bced-45a5-912f-17f25c354403
 Accept: application/json
 
 ### Create mood
@@ -11,30 +11,26 @@ POST http://localhost:5000/v1/moods
 Content-Type: application/json
 
 {
-    "channel_id": "10",
-    "description": "Would let use of figure buy. Rather page school join ability make others check. Cause your already statement money.",
-    "duration": 120,
-    "published_at": "2023-04-18T15:00:41",
-    "thumbnail_url": "https://picsum.photos/535/476",
-    "title": "Participant box before federal appear.",
-    "url": "https://www.aguilar-torres.com/"
+    "date": "2023-03-18T15:00:41",
+    "feeling": "happy",
+    "intensity": 5,
+    "comments": "Lorem ipsum dolor comment",
+    "activity": "Lorem ipsum dolor activity"
 }
 
 
 ### Update mood
-PUT http://localhost:5000/v1/moods/5
+PUT http://localhost:5000/v1/moods/860be9a5-a48b-4c40-ad04-fde0313f7a72
 Content-Type: application/json
 
 {
-    "channel_id": "10",
-    "description": "Description modified",
-    "duration": 12,
-    "published_at": "2023-04-18T15:00:41",
-    "thumbnail_url": "https://picsum.photos/535/476",
-    "title": "Title Modified!",
-    "url": "https://www.aguilar-torres.com/"
+    "date": "2023-03-18T15:00:41",
+    "feeling": "happy",
+    "intensity": 5,
+    "comments": "It's changed comments",
+    "activity": "It's a brand new changed activity"
 }
 
 ### Delete mood
-DELETE http://localhost:5000/v1/moods/2
+DELETE http://localhost:5000/v1/moods/860be9a5-a48b-4c40-ad04-fde0313f7a72
 Content-Type: application/json

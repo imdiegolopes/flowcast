@@ -1,5 +1,5 @@
 class Mood:
-    def __init__(self, id: str, date: str, feeling: str, intensity: int, comments: str, activity: str):
+    def __init__(self, id: str, date: str, feeling: str, intensity: int, comments: str, activity: str, created_on: str = None, updated_on: str = None):
         self.validate(id, date, feeling, intensity, comments, activity)
 
         self.id = id
@@ -8,10 +8,21 @@ class Mood:
         self.intensity = intensity
         self.comments = comments
         self.activity = activity
+        self.created_on = created_on
+        self.updated_on = updated_on
         pass
 
     def get_value(self) -> dict:
-        pass
+        return {
+            "id": self.id,
+            "date": self.date,
+            "feeling": self.feeling,
+            "intensity": self.intensity,
+            "comments": self.comments,
+            "activity": self.activity,
+            "created_on": self.created_on,
+            "updated_on": self.updated_on
+        }
 
     def validate(self, id, date, feeling, intensity, comments, activity) -> bool:
         if date is None:

@@ -1,129 +1,241 @@
 openapi: 3.0.0
 info:
-  title: mood API
+  title: Mood API
   version: 1.0.0
-servers:
-  - url: http://localhost:5000
 paths:
-  /v1/moods:
+  /moods:
     get:
       summary: Get all moods
-      description: Returns a list of all moods.
       responses:
-        '200':
-          description: A JSON array of moods
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/mood'
+        "200":
+          description: OK
+      tags:
+        - moods
     post:
-      summary: Create a mood
-      description: Creates a new mood with the given data.
+      summary: Create a new mood
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/moodInput'
+              $ref: "#/components/schemas/MoodInput"
       responses:
-        '201':
-          description: The newly created mood
+        "201":
+          description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/mood'
-  /v1/moods/{id}:
+                $ref: "#/components/schemas/MoodOutput"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      tags:
+        - moods
+  /moods/{mood_id}:
     get:
       summary: Get a mood by ID
-      description: Returns a single mood with the given ID.
       parameters:
-        - name: id
+        - name: mood_id
           in: path
-          description: The ID of the mood to retrieve
           required: true
+          description: The ID of the mood to retrieve
           schema:
-            type: integer
+            type: string
       responses:
-        '200':
-          description: The requested mood
+        "200":
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/mood'
+                $ref: "#/components/schemas/MoodOutput"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      tags:
+        - moods
     put:
       summary: Update a mood by ID
-      description: Updates the mood with the given ID with the provided data.
       parameters:
-        - name: id
+        - name: mood_id
           in: path
-          description: The ID of the mood to update
           required: true
+          description: The ID of the mood to update
           schema:
-            type: integer
+            type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/moodInput'
+              $ref: "#/components/schemas/MoodInput"
       responses:
-        '200':
-          description: The updated mood
+        "200":
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/mood'
+                $ref: "#/components/schemas/MoodOutput"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      tags:
+        - moods
     delete:
       summary: Delete a mood by ID
-      description: Deletes the mood with the given ID.
       parameters:
-        - name: id
+        - name: mood_id
           in: path
-          description: The ID of the mood to delete
           required: true
+          description: The ID of the mood to delete
           schema:
-            type: integer
+            type: string
       responses:
-        '200':
-          description: The mood was deleted successfully
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
 components:
   schemas:
-    mood:
+    MoodInput:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+          description: The date of the mood
+        feeling:
+          type: string
+          description: The feeling of the mood
+        intensity:
+          type: integer
+          description: The intensity of the mood
+        comments:
+          type: string
+          description: The comments of the mood
+        activity:
+          type: string
+          description: The activity of the mood
+      required:
+        - date
+        - feeling
+        - intensity
+      example:
+        date: "2023-04-29T12:34:56Z"
+        feeling: happy
+        intensity: 5
+        comments: Feeling great today!
+        activity: Working on a new project
+    MoodOutput:
       type: object
       properties:
         id:
-          type: integer
-          description: The unique identifier for the mood.
-        title:
           type: string
-          description: The title of the mood.
-        description:
-          type: string
-          description: A brief description of the mood.
-        url:
-          type: string
-          description: The URL where the mood can be accessed.
-        duration:
-          type: integer
-          description: The length of the mood in seconds.
-        thumbnail_url:
-          type: string
-          description: The URL of the mood's thumbnail image.
-        published_at:
+          description: The ID of the mood
+        date:
           type: string
           format: date-time
-          description: The date and time the mood was published.
-        channel_id:
+          description: The date of the mood
+        feeling:
+          type: string
+          description: The feeling of the mood
+        intensity:
           type: integer
-          description: The ID of the channel that the mood belongs to.
+          description: The intensity of the mood
+        comments:
+          type: string
+          description: The comments of the mood
+        activity:
+          type: string
+          description: The activity of the mood
+        created_on:
+          type: string
+          format: date-time
+          description: The datetime the mood was created
+        updated_on:
+          type: string
+          format: date-time
+          description: The datetime the mood was last updated
       required:
-        - title
-        - url
-    moodInput:
+        - id
+        - date
+        - feeling
+        - intensity
+        - created_on
+        - updated_on
+      example:
+        id: 68f01417-84d6-44a6-920f-406ec3b7f90f
+        date: "2023-04-29T12:34:56Z"
+        feeling: happy
+        intensity: 5
+        comments: Feeling great today!
+        activity: Working on a new project
+        created_on: "2023-04-29T12:34:56Z"
+        updated_on: "2023-04-29T12:34:56Z"
+    Error:
       type: object
       properties:
-        title:
+        error:
           type: string
-          description: The title
+          description: The error message
+      required:
+        - error
+      example:
+        error: Invalid data
+    Message:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The message
+      required:
+        - message
+      example:
+        message: Mood deleted successfully
