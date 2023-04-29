@@ -85,17 +85,22 @@ class MoodHandler:
 
         try:
             mood_id = str(mood_id)
-            input = Mood(mood_id, data.get('date'), data.get('feeling'), data.get('intensity'),
-                         data.get('comments'), data.get('activity'))
-
-            output = input.get_value()
-            output['updated_on'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            del output['created_on']
 
             mood_repository = MoodRepository()
+            mood = mood_repository.get_by_id(mood_id)
+
+            if mood is None:
+                return jsonify({
+                    "error": "Mood not found"
+                }), 404
+
+            input = Mood(mood_id, data.get('date'), data.get('feeling'), data.get('intensity'),
+                         data.get('comments'), data.get('activity'), mood[6], datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+
+            output = input.get_value()
+
             result = mood_repository.update(input, mood_id)
 
-            output['id'] = mood_id
 
             if result is None:
                 return jsonify({

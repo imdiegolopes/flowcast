@@ -3,7 +3,7 @@ GET http://localhost:5000/v1/moods
 Accept: application/json
 
 ### Get mood 
-GET http://localhost:5000/v1/moods/1c5709dc-bced-45a5-912f-17f25c354403
+GET http://localhost:5000/v1/moods/b10fe89d-41e8-4669-8cc7-f50d540710c6
 Accept: application/json
 
 ### Create mood
@@ -20,7 +20,7 @@ Content-Type: application/json
 
 
 ### Update mood
-PUT http://localhost:5000/v1/moods/860be9a5-a48b-4c40-ad04-fde0313f7a72
+PUT http://localhost:5000/v1/moods/b10fe89d-41e8-4669-8cc7-f50d540710c6
 Content-Type: application/json
 
 {
