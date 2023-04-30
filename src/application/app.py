@@ -6,7 +6,7 @@ from flask import (
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}} )
 
 app.add_url_rule('/', 'index', HealthcheckHandler.handle, methods=['GET'])
 app.add_url_rule('/healthcheck', 'healthcheck',
@@ -19,8 +19,8 @@ app.add_url_rule('/v1/moods', 'create_mood',
                  MoodHandler.handle_create_mood, methods=['POST'])
 app.add_url_rule('/v1/moods/<uuid:mood_id>', 'update_mood',
                  MoodHandler.handle_update_mood, methods=['PUT'])
-app.add_url_rule('/v1/moods/<uuid:mood_id>', 'delete_mood',
-                 MoodHandler.handle_delete_mood, methods=['DELETE'])
+app.add_url_rule('/v1/moods/<mood_id>', 'delete_mood',
+                 MoodHandler.handle_delete_mood, methods=['POST'])
 
 
 if __name__ == '__main__':

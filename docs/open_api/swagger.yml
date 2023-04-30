@@ -123,7 +123,7 @@ paths:
                 $ref: "#/components/schemas/Error"
       tags:
         - moods
-    delete:
+    post:
       summary: Delete a mood by ID
       parameters:
         - name: mood_id
